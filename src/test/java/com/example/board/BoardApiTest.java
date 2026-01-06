@@ -76,6 +76,21 @@ public class BoardApiTest {
         assertThat(response.statusCode()).isEqualTo(200);
     }
 
+
+    @Test
+    void deletePost() {
+
+        makePost3();
+
+        게시글_삭제_요청(2L);
+
+        ExtractableResponse<Response> response = 게시글_전체_조회();
+
+        assertThat(response.statusCode()).isEqualTo(200);
+
+
+    }
+
     private void makePost3() {
         final AddPostRequest request1 = postRegistRequestMake();
         final AddPostRequest request2 = postRegistRequestMake();
@@ -145,6 +160,16 @@ public class BoardApiTest {
 
         return new UpdatePostRequest(id, title, context);
     }
-        // 게시판 삭제
+
+    // 게시글 삭제
+    public void 게시글_삭제_요청(Long id) {
+        RestAssured.given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(id)
+                .when()
+                .post("/board/delete")
+                .then()
+                .log().all().extract();
+    }
 
 }

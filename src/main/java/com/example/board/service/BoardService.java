@@ -5,6 +5,7 @@ import com.example.board.dto.UpdatePostRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -47,4 +48,15 @@ public class BoardService {
     }
 
 
+    public void delete(Long id) {
+
+        Iterator<Board> it = boardList.iterator();
+
+        while (it.hasNext()) {
+            if (it.next().getId().equals(id)) {
+                it.remove();
+                break;
+            }
+        }
+    }
 }

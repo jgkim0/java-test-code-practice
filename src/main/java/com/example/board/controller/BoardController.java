@@ -54,4 +54,12 @@ public class BoardController {
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @PostMapping("/delete")
+    public ResponseEntity<PostResponse> delete(@RequestBody Long id){
+
+        boardService.delete(id);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 }
