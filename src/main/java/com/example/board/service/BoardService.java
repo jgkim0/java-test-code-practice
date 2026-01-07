@@ -15,7 +15,7 @@ public class BoardService {
     private static final AtomicLong SEQ = new AtomicLong(1);
     private final List<Board> boardList = new ArrayList<>();
 
-    public void addBoard (final Board board) {
+    public void addBoard (Board board) {
 
         Long id = SEQ.getAndIncrement();
 
@@ -31,7 +31,7 @@ public class BoardService {
         return boardList;
     }
 
-    public Board viewPost(final Long id) {
+    public Board viewPost(Long id) {
         return boardList.stream()
                 .filter(b -> b.getId().equals(id))
                 .findFirst()
@@ -50,13 +50,15 @@ public class BoardService {
 
     public void delete(Long id) {
 
-        Iterator<Board> it = boardList.iterator();
+//        Iterator<Board> it = boardList.iterator();
+//
+//        while (it.hasNext()) {
+//            if (it.next().getId().equals(id)) {
+//                it.remove();
+//                break;
+//            }
+//        }
 
-        while (it.hasNext()) {
-            if (it.next().getId().equals(id)) {
-                it.remove();
-                break;
-            }
-        }
+        boardList.removeIf(b -> b.getId().equals(id));
     }
 }

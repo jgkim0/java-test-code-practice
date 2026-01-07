@@ -16,7 +16,7 @@ public class Board {
     private LocalDateTime regDate = LocalDateTime.now();
     private String context;
 
-    public Board(final String title, final String writer, final String context) {
+    public Board(String title,  String writer, String context) {
         Assert.hasText(title, "제목은 필수입니다.");
         Assert.hasText(writer, "작성자는 필수입니다.");
         Assert.hasText(context, "내용은 필수입니다.");
@@ -25,7 +25,7 @@ public class Board {
         this.context = context;
     }
 
-    public Board(final Long id, final String title, final String writer, final String context) {
+    public Board( Long id,  String title,  String writer,  String context) {
         Assert.hasText(title, "제목은 필수입니다.");
         Assert.hasText(writer, "작성자는 필수입니다.");
         Assert.hasText(context, "내용은 필수입니다.");
@@ -35,7 +35,7 @@ public class Board {
         this.context = context;
     }
 
-    public void update(String title, String context) {
+    public void update( String title,  String context) {
         if (title != null) {
             Assert.hasText(title, "제목은 필수입니다.");
             this.title = title;

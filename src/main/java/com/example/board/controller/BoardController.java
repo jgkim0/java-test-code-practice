@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/boards")
 public class BoardController {
 
     private final BoardService boardService;
@@ -21,7 +21,7 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<Void> addPostRequest(@RequestBody AddPostRequest request) {
         Board post = new Board(request.title(), request.writer(), request.context());
 
@@ -31,7 +31,7 @@ public class BoardController {
 
     }
 
-    @GetMapping("/view/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PostResponse> viewPost(@PathVariable("id") Long id) {
         Board board = boardService.viewPost(id);
 
@@ -39,7 +39,7 @@ public class BoardController {
 
     }
 
-    @GetMapping("/findAll")
+    @GetMapping()
     public ResponseEntity<List<Board>> viewAllPost() {
         List<Board> boardList = boardService.findAll();
 
@@ -47,7 +47,7 @@ public class BoardController {
 
     }
 
-    @PostMapping("/update")
+    @PutMapping()
     public ResponseEntity<PostResponse> update(@RequestBody UpdatePostRequest updatePostRequest){
 
         boardService.update(updatePostRequest);
@@ -55,7 +55,7 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("")
     public ResponseEntity<PostResponse> delete(@RequestBody Long id){
 
         boardService.delete(id);

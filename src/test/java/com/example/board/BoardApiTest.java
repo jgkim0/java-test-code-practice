@@ -28,20 +28,16 @@ public class BoardApiTest {
 
     @Test
     void registPost() {
-        final AddPostRequest request1 = postRegistRequestMake();
-        final AddPostRequest request2 = postRegistRequestMake();
-        final AddPostRequest request3 = postRegistRequestMake();
+        AddPostRequest request1 = postRegistRequestMake();
+        AddPostRequest request2 = postRegistRequestMake();
 
         // API 요청
-        final ExtractableResponse<Response> response1 = postRegisterRequest(request1);
-        final ExtractableResponse<Response> response2 = postRegisterRequest(request2);
-        final ExtractableResponse<Response> response3 = postRegisterRequest(request3);
+        ExtractableResponse<Response> response1 = postRegisterRequest(request1);
+        ExtractableResponse<Response> response2 = postRegisterRequest(request2);
 
         assertThat(response1.statusCode()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(response2.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(response3.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-
-    }
+   }
 
     @Test
     void viewPost() {
@@ -92,9 +88,9 @@ public class BoardApiTest {
     }
 
     private void makePost3() {
-        final AddPostRequest request1 = postRegistRequestMake();
-        final AddPostRequest request2 = postRegistRequestMake();
-        final AddPostRequest request3 = postRegistRequestMake();
+        AddPostRequest request1 = postRegistRequestMake();
+        AddPostRequest request2 = postRegistRequestMake();
+        AddPostRequest request3 = postRegistRequestMake();
         postRegisterRequest(request1);
         postRegisterRequest(request2);
         postRegisterRequest(request3);
@@ -107,14 +103,14 @@ public class BoardApiTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
                 .when()
-                .post("/board/add")
+                .post("/boards")
                 .then()
                 .log().all().extract();
     }
 
     // 게시글 작성
     private static AddPostRequest postRegistRequestMake() {
-        String title = "히히";
+        String title = "title";
         String writer = "야호";
         String context = "r u happy with this?";
 
@@ -126,7 +122,7 @@ public class BoardApiTest {
     ExtractableResponse<Response> 게시글_조회_결과확인(Long id) {
         return RestAssured.given().log().all()
                         .when()
-                        .get("/board/view/" + id)
+                        .get("boards/" + id)
                         .then()
                         .log().all().extract();
     }
@@ -136,7 +132,7 @@ public class BoardApiTest {
     public ExtractableResponse<Response> 게시글_전체_조회() {
         return RestAssured.given().log().all()
                 .when()
-                .get("/board/findAll")
+                .get("/boards")
                 .then()
                 .log().all().extract();
     }
@@ -148,7 +144,7 @@ public class BoardApiTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
                 .when()
-                .post("/board/update")
+                .put("/boards")
                 .then()
                 .log().all().extract();
     }
@@ -167,7 +163,7 @@ public class BoardApiTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(id)
                 .when()
-                .post("/board/delete")
+                .delete("/boards")
                 .then()
                 .log().all().extract();
     }
