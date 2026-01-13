@@ -1,11 +1,11 @@
 package com.example.board.service;
 
+import com.example.board.controller.dto.RequestDto;
 import com.example.board.domain.Board;
 import com.example.board.dto.UpdatePostRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -27,7 +27,7 @@ public class BoardService {
     }
 
 
-    public List<Board> findAll() {
+    public List<RequestDto> findAll() {
         return boardList;
     }
 

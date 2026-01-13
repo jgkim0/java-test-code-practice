@@ -1,5 +1,6 @@
 package com.example.board.controller;
 
+import com.example.board.controller.dto.RequestDto;
 import com.example.board.domain.Board;
 import com.example.board.dto.AddPostRequest;
 import com.example.board.dto.PostResponse;
@@ -40,8 +41,8 @@ public class BoardController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Board>> viewAllPost() {
-        List<Board> boardList = boardService.findAll();
+    public ResponseEntity<List<RequestDto>> viewAllPost() {
+        List<RequestDto> boardList = boardService.findAll();
 
         return ResponseEntity.status(HttpStatus.CREATED).body(boardList);
 
